@@ -1,0 +1,158 @@
+:root {
+  --font-color: #707070;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 10px auto 0 auto;
+}
+
+main {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer {
+  background-color: #bababa;
+  width: 100%;
+  height: 5em;
+  margin: 0;
+  text-align: center;
+  font-family: Optima;
+}
+
+footer p {
+  margin: 3em;
+  padding: 2em;
+}
+
+h1,
+h2,
+h3,
+li,
+a {
+  font-family: Optima;
+  font-weight: 50;
+  text-decoration: none;
+  color: var(--font-color);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 3.5em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+hr {
+  width: 100%;
+}
+.home-page {
+  display: grid;
+  grid-template-rows: auto;
+  place-items: center;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+nav {
+  width: 60%;
+  max-width: 900px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+nav li:hover {
+  opacity: 0.8;
+}
+
+.logo img {
+  width: 40%;
+  height: auto;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2em;
+}
+
+main .home-block {
+  background: #e0ddd6;
+  position: relative;
+  /* border: solid 1px var(--font-color); */
+  height: 20em;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  /* object-fit: cover; */
+  overflow: hidden;
+}
+
+main .home-block h2 {
+  position: absolute;
+  font-size: 2.5em;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  background: rgba(196, 221, 231, 0.8);
+  padding: 25px;
+  width: 80%;
+}
+
+main .home-block img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.5;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+}
+
+main .home-block:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+#welcome {
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+
+/* #welcome img {
+  height: 100%;
+  transform: translateY(-45%);
+} */
+
+#stories {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+#people {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+#add-new {
+  grid-column: 1/3;
+  grid-row: 3/4;
+}

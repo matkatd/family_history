@@ -1,0 +1,273 @@
+:root {
+  --font-color: #585757;
+  --header-color: #e2d9c6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto 0 auto;
+}
+
+main {
+  margin: 0;
+  /* padding: 20px; */
+}
+
+footer {
+  background-color: #bababa;
+  width: 100%;
+  height: 5em;
+  margin: 0;
+  text-align: center;
+  font-family: Optima;
+}
+
+footer p {
+  margin: 3em;
+  padding: 2em;
+}
+
+h1,
+h2,
+h3,
+li,
+a {
+  font-family: Optima;
+  font-weight: 50;
+  text-decoration: none;
+  color: var(--font-color);
+  text-transform: uppercase;
+}
+
+form {
+  font-family: Optima;
+}
+
+h1 {
+  font-size: 1.75em;
+  align-self: start;
+  text-align: start;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+nav {
+  display: flex;
+  box-shadow: 0px 3px 7px var(--font-color);
+  height: 5em;
+  align-items: center;
+}
+
+.nav-text {
+  display: flex;
+  padding-left: 20px;
+  padding-right: 50px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+nav li {
+  padding: 0 10px;
+}
+
+nav li:hover {
+  opacity: 0.8;
+}
+
+.logo img {
+  width: 50px;
+  margin-left: 50px;
+  height: auto;
+  justify-self: start;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title-section {
+  height: 13em;
+  width: 100%;
+  background-color: var(--header-color);
+  position: static;
+  z-index: -1;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.title-section h2 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.login-box {
+  width: 40%;
+  height: auto;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: var(--font-color);
+  display: grid;
+  place-items: center;
+  border: solid 0.5px var(--font-color);
+}
+
+.pass,
+.username {
+  margin: 10px auto;
+  font-size: 2em;
+}
+
+.login-box input {
+  margin: 10px auto;
+}
+
+#passw,
+#username {
+  color: var(--font-color);
+  font-family: Optima;
+  font-size: 0.75em;
+  border: solid 0.5px var(--font-color);
+  width: 100%;
+  padding: 5px;
+}
+
+.submit-button {
+  background-color: #c4dde7;
+  color: var(--font-color);
+  border: none;
+  font-family: Optima;
+  font-size: 1.5em;
+  border-radius: 15px;
+  width: 50%;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.submit-button:hover,
+.submit-button:active {
+  /* border: solid 0.5px var(--font-color); */
+  background-color: #cde8f2;
+}
+
+section {
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2em;
+  padding: 0 1em;
+}
+
+.person-card {
+  width: 100%;
+  /* height: fit-content; */
+  text-align: center;
+  /* border: solid 0.5px var(--font-color); */
+}
+
+.person-card h3 {
+  display: block;
+  font-size: 1.5em;
+  background-color: #e0ddd6;
+  border: solid 0.5px var(--font-color);
+  padding: 1.5em 0.25em;
+  margin: 2em 0 0 0;
+}
+
+.person-card a {
+  display: block;
+  padding: 1em 0;
+  border: solid 0.5px var(--font-color);
+  background-color: #c4dde7;
+}
+
+.person-card a:hover,
+.person-card a:active {
+  background-color: #cde8f2;
+}
+
+#vitals {
+  width: 100%;
+  height: auto;
+  margin: 2em auto;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  font-family: Optima;
+  text-transform: none;
+  gap: 0;
+  color: var(--font-color);
+}
+
+#vitals h4 {
+  font-size: 2.25rem;
+}
+
+#vitals p {
+  font-size: 2rem;
+}
+
+#vitals ul {
+  padding: auto;
+  font-size: 2rem;
+  text-transform: none;
+}
+
+#vitals li {
+  text-transform: none;
+}
+
+.birth {
+  margin-top: 2rem;
+}
+
+#vitals div {
+  margin-left: 4rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .nav-text {
+    padding: 0;
+  }
+  .logo img {
+    margin: 0 1em;
+  }
+}
+
+@media only screen and (max-width: 805px) {
+  .nav-text ul {
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .person-card h3 {
+    font-size: 1.25em;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-card h3 {
+    margin: 1em 0 0 0;
+    padding: 1em 0.25em;
+  }
+}
