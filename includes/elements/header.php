@@ -28,13 +28,13 @@ spl_autoload_register(function ($class) {
     <header class="other-page">
 
         <nav>
-            <a class="logo" href=<?= $home ?>>
+            <a class="logo header-text" href=<?= $home ?>>
                 <img src="/family_history/images/tree-of-life-drawing-celtic-style-gold.png"></a>
             <div class="nav-text">
                 <a href=<?= $home ?>>
-                    <h1>Price Family History</h1>
+                    <h1 class="header-text">Price Family History</h1>
                 </a>
-                <ul>
+                <ul class="header-text">
                     <li><a href=<?= $stories ?>>Stories</a></li>
                     <li><a href=<?= $people ?>>People</a></li>
                     <li><a href=<?= $about ?>>About</a></li>
@@ -42,7 +42,7 @@ spl_autoload_register(function ($class) {
                 </ul>
             </div>
         </nav>
-        <div class="title-section">
+        <div class="title-section header-text">
             <h2>
                 <?= $page_title ?>
             </h2>

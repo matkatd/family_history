@@ -21,15 +21,17 @@ $people_for_story = StoryCollection::getPeopleForStory($story_id);
 //var_dump($people_for_story);    
 
 ?>
-<main>
+<main class="story-page">
     <h3><?= $story_record->getSummary() ?></h3>
-    <ul>
+    <h4>People in this story:</h4>
+    <ul style="text-decoration: underline;">
         <?php foreach ($people_for_story as $person) : ?>
         <li><a href="./personPage.php?id=<?= $person->getPersonID() ?>"><?= $person->getFullName() ?></a></li>
         <?php endforeach; ?>
     </ul>
+    <h4>The Story</h4>
     <section>
-        <?= $story_record->getStoryContent() ?>
+        <?= htmlspecialchars_decode($story_record->getStoryContent()) ?>
     </section>
 </main>
 </body>

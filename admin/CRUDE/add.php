@@ -12,8 +12,34 @@ spl_autoload_register(function ($class) {
 });
 # Get names of people from db
 $allPeople = PeopleRecordCollection::getAll();
-var_dump($_POST);
+//var_dump($_POST);
 $page_title = "Add New Story";
+
+if (!empty($_POST)) {
+    # 1 - Eliminate whitespace
+    $summary = trim($_POST['summary']);
+    $story_content = trim($_POST['story_content']);
+    $people_list = $_POST['person'];
+    foreach ($people_list as $person) {
+        $person = trim($person);
+    }
+
+    # 2 - Sanitize
+    $summary = htmlspecialchars($summary);
+    $story_content = htmlspecialchars($story_content);
+    foreach ($people_list as $person) {
+        $person = htmlspecialchars($person);
+    }
+
+    # 4 - Add new ability to database
+    $added_story = StoryCollection::create($summary, $story_content, $people_list);
+
+    # 5 - Redirect on success
+    if ($added_story) {
+        header('Location: ./index.php');
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +58,7 @@ $page_title = "Add New Story";
 </head>
 
 <body>
-    <header class="other-page">
+    <header class="other-page header-text">
 
         <nav>
             <a class="logo" href=<?= $home ?>>
@@ -60,22 +86,23 @@ $page_title = "Add New Story";
 
 
         <!-- Create the editor container -->
-        <form action="" method="POST">
-            <label for="summ-entry">Entery a short (200 characters) summary of the story:</label></br>
-            <input type="text" maxlength="200" id="summ-entry"></br>
+        <form class="add-form" action="" method="POST">
+            <label for="summ-entry">Enter a short (200 characters) summary of the story:</label></br>
+            <input name="summary" type="text" maxlength="200" id="summ-entry" autocomplete="off"></br>
             <label for="editor">Enter your story below</label></br>
             <div id="editor"></div>
             <input type="hidden" name="story_content" id="hiddenInput">
 
-            <label for="person">Select the name of the primary person associated with this story:</label></br>
-            <p>(If you want to add more people, go to the "EDIT" page after you have submitted)</p>
-            <select name="person" class="drop-down">
+            <label for="person[]">Select the name of the primary people associated with this story:</label></br>
+            <p>(If you want to add more people, press and hold the CONTROL key (or COMMAND for MacOS users) to select
+                multiple entries))</p>
+            <select name="person[]" class="drop-down" multiple="multiple">
                 <?php foreach ($allPeople as $person) : ?>
                 <option value="<?= $person->getPersonKey() ?>"><?= $person->getFullName() ?></option>
                 <?php endforeach; ?>
             </select></br>
 
-            <input class="submit-button" type="submit" value="Submit">
+            <input class="submit-button add-button" type="submit" value="Submit">
         </form>
     </main>
 </body>
@@ -103,7 +130,7 @@ $page_title = "Add New Story";
         }], // outdent/indent
 
         [{
-            'header': [1, 2, 3, 4, 5, 6, false]
+            'header': [3, 4, 5, 6, false]
         }],
         ['clean'] // remove formatting button
     ];

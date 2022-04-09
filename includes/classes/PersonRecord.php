@@ -28,6 +28,9 @@ class PersonRecord
     }
     public function getFullName()
     {
+        if ($this->first_name === "undefined") {
+            return "Unknown {$this->last_name}";
+        }
         return "{$this->first_name} {$this->last_name}";
     }
     public function getBirthDate()

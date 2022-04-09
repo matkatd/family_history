@@ -33,21 +33,33 @@ footer p {
 h1,
 h2,
 h3,
+h4,
+h5,
+h6,
 li,
-a {
+a,
+p,
+form {
   font-family: Optima;
   font-weight: 50;
   text-decoration: none;
   color: var(--font-color);
+}
+
+.header-text {
   text-transform: uppercase;
 }
 
-form,
-p {
-  font-weight: 50;
-  text-decoration: none;
-  color: var(--font-color);
-  font-family: Optima;
+h3,
+h4 {
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+h4 {
+  font-weight: 600;
 }
 
 h1 {
@@ -55,12 +67,6 @@ h1 {
   align-self: start;
   text-align: start;
   margin: 0;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  font-size: 1.5em;
 }
 
 nav {
@@ -79,6 +85,9 @@ nav {
 }
 
 nav ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.5em;
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -262,6 +271,30 @@ main {
   border-radius: 15px;
   font-size: 1.5em;
   margin: 1.5em;
+}
+
+.story-page {
+  max-width: 65ch;
+  line-height: 170%;
+  font-size: 120%;
+}
+
+#summ-entry {
+  margin-bottom: 1.5em;
+}
+
+#editor {
+  margin-bottom: 1.5em;
+}
+
+.add-form {
+  margin: 1.5em;
+}
+
+.add-button {
+  margin: 1em 0;
+  width: 25%;
+  min-width: 200px;
 }
 
 @media only screen and (max-width: 900px) {
