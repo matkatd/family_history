@@ -50,6 +50,8 @@ class FamilyRecordCollection
         $statement->setFetchMode(PDO::FETCH_CLASS, "FamilyRecord");
         $record = $statement->fetch();
         $peopleRecords = PeopleRecordCollection::getAll();
+        //echo "Hello there ";
+        //var_dump($peopleRecords);
         $record->setHusbandAndWifeName($peopleRecords);
         $decoded_ids = json_decode($record->getChildrenIDs());
         //var_dump($decoded_ids);

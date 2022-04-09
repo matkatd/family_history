@@ -25,20 +25,40 @@ if (!$person_id) {
 
 # 3 Get record data
 $person_record = PeopleRecordCollection::get($person_id);
+$famc_record = "";
+// var_dump($person_record->getFamc());
+if (strlen($person_record->getFamc()) != 0) {
+    $famc_record = FamilyRecordCollection::get($person_record->getFamc());
+}
 
-$famc_record = FamilyRecordCollection::get($person_record->getFamc());
-$fams_record = FamilyRecordCollection::get($person_record->getFams());
+$fams_record = "";
+$color = "#DBF5FF";
+
+// Checks if the record has a fams ID. If it does, grab that record. Otherwise, don't
+if (strlen($person_record->getFams()) != 0) {
+    $fams_record = FamilyRecordCollection::get($person_record->getFams());
+    $spouse_name = $fams_record->getWifeName();
+    if ($person_record->getGender() == "F") {
+        $color = "#F4E4F2";
+        $spouse_name = $fams_record->getHusbandName();
+    }
+}
+
+// Change the color of the header based on gender
+if ($person_record->getGender() == "F") {
+    $color = "#F4E4F2";
+}
 
 if (!$person_record) {
     header('Location: index.php');
 } else {
 }
-$color = "#DBF5FF";
-$spouse_name = $fams_record->getWifeName();
-if ($person_record->getGender() == "F") {
-    $color = "#F4E4F2";
-    $spouse_name = $fams_record->getHusbandName();
-}
+
+# Get Stories
+
+$storiesCollection = StoryCollection::getByPerson($person_record->getPersonKey());
+//var_dump($storiesCollection);
+
 //echo $fams_record->getChildrenNames();
 $page_title = $person_record->getFullName();
 
@@ -93,16 +113,27 @@ $page_title = $person_record->getFullName();
                 <p><?= ucwords(strtolower($person_record->getDeathDate())); ?></p>
                 <p><?= ucwords(strtolower($person_record->getDeathPlace())); ?></p>
             </div>
+            <?php if ($famc_record != "") { ?>
             <div class="parents">
                 <h4>Father:</h4>
                 <p><?= ucwords(strtolower($famc_record->getHusbandName())); ?> </p>
                 <h4>Mother:</h4>
                 <p><?= ucwords(strtolower($famc_record->getWifeName())); ?> </p>
             </div>
+            <?php } else { ?>
+            <div class="parents">
+                <h4>Father:</h4>
+                <p>Unknown </p>
+                <h4>Mother:</h4>
+                <p>Unknown </p>
+            </div>
+            <?php } ?>
+            <?php if ($fams_record != "") : ?>
             <div class="marriage">
                 <h4>Married to:</h4>
                 <p><?= ucwords(strtolower($spouse_name)); ?> </p>
             </div>
+            <?php if (sizeof($fams_record->getChildrenNames()) != 0) : ?>
             <div class="children">
                 <h4>Children:</h4>
                 <ul>
@@ -111,35 +142,17 @@ $page_title = $person_record->getFullName();
                     <?php endforeach; ?>
                 </ul>
             </div>
+            <?php endif; ?>
+            <?php endif; ?>
         </section>
         <section id="stories-list">
+            <?php foreach ($storiesCollection as $story) : ?>
             <div class="story-card">
                 <div class="img-container"></div>
-                <div class="title">
-                    <h3>Story Name</h3>
-                </div>
+                <a href="./storyPage.php?id=<?= $story->getKey(); ?>"><?= $story->getSummary(); ?></a>
             </div>
-
-            <div class="story-card">
-                <div class="img-container"></div>
-                <div class="title">
-                    <h3>Story Name</h3>
-                </div>
             </div>
-
-            <div class="story-card">
-                <div class="img-container"></div>
-                <div class="title">
-                    <h3>Story Name</h3>
-                </div>
-            </div>
-
-            <div class="story-card">
-                <div class="img-container"></div>
-                <div class="title">
-                    <h3>Story Name</h3>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </section>
     </main>
 </body>

@@ -4,7 +4,8 @@ class PeopleRecordCollection
     public static function getAll()
     {
         $query = "
-             SELECT p.first_name, 
+             SELECT p.person_key,
+                    p.first_name, 
 		            p.last_name,
                     p.birth_date,
                     p.birth_place,
@@ -30,7 +31,8 @@ class PeopleRecordCollection
     public static function get($person_id)
     {
         $query = "
-         SELECT p.first_name, 
+         SELECT p.person_key,
+                p.first_name, 
                 p.last_name,
                 p.birth_date,
                 p.birth_place,

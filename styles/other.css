@@ -42,7 +42,11 @@ a {
   text-transform: uppercase;
 }
 
-form {
+form,
+p {
+  font-weight: 50;
+  text-decoration: none;
+  color: var(--font-color);
   font-family: Optima;
 }
 
@@ -165,7 +169,7 @@ main {
   background-color: #cde8f2;
 }
 
-section {
+.people-list {
   margin: 30px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -173,14 +177,16 @@ section {
   padding: 0 1em;
 }
 
-.person-card {
+.person-card,
+.story-card {
   width: 100%;
   /* height: fit-content; */
   text-align: center;
   /* border: solid 0.5px var(--font-color); */
 }
 
-.person-card h3 {
+.person-card h3,
+.story-card h3 {
   display: block;
   font-size: 1.5em;
   background-color: #e0ddd6;
@@ -189,7 +195,8 @@ section {
   margin: 2em 0 0 0;
 }
 
-.person-card a {
+.person-card a,
+.story-card a {
   display: block;
   padding: 1em 0;
   border: solid 0.5px var(--font-color);
@@ -197,7 +204,9 @@ section {
 }
 
 .person-card a:hover,
-.person-card a:active {
+.person-card a:active,
+.story-card a:hover,
+.story-card a:active {
   background-color: #cde8f2;
 }
 
@@ -240,6 +249,21 @@ section {
   margin-left: 4rem;
 }
 
+.admin-cont {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-button {
+  padding: 1em;
+  text-align: center;
+  border: solid 0.5px var(--font-color);
+  background: #e0ddd6;
+  border-radius: 15px;
+  font-size: 1.5em;
+  margin: 1.5em;
+}
+
 @media only screen and (max-width: 900px) {
   .nav-text {
     padding: 0;
@@ -256,17 +280,23 @@ section {
 }
 
 @media only screen and (max-width: 770px) {
-  .person-card h3 {
+  .person-card h3,
+  .story-card h3 {
     font-size: 1.25em;
   }
 }
 
 @media only screen and (max-width: 650px) {
+  .admin-cont {
+    flex-direction: column;
+  }
+
   section {
     display: flex;
     flex-direction: column;
   }
-  .person-card h3 {
+  .person-card h3,
+  .story-card h3 {
     margin: 1em 0 0 0;
     padding: 1em 0.25em;
   }

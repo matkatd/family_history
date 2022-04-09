@@ -1,16 +1,22 @@
 <?php
 class PersonRecord
 {
-    private $first_name;
-    private $last_name;
-    private $birth_date;
-    private $birth_place;
-    private $death_date;
-    private $death_place;
-    private $gender;
-    private $fams;
-    private $famc;
-    private $person_id;
+    private $person_key = "";
+    private $first_name = "";
+    private $last_name = "";
+    private $birth_date = "";
+    private $birth_place = "";
+    private $death_date = "";
+    private $death_place = "";
+    private $gender = "";
+    private $fams = "";
+    private $famc = "";
+    private $person_id = "";
+
+    public function getPersonKey()
+    {
+        return $this->person_key;
+    }
 
     public function getFirstName()
     {

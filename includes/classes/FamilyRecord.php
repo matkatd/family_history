@@ -40,11 +40,19 @@ class FamilyRecord
 
     public function setHusbandAndWifeName($peopleRecords)
     {
+        //echo "did we make it here?";
         foreach ($peopleRecords as $person) {
+            //var_dump($person->getFams());
+            //echo $this->family_id . "\n";
+            //echo "and in the loop";
             if ($person->getFams() == $this->family_id && $person->getGender() == 'M') {
+                // echo "it's a dude";
+                // echo $person->getFullName();
                 $this->husband_name = $person->getFullName();
             }
             if ($person->getFams() == $this->family_id && $person->getGender() == 'F') {
+                // echo "it's a lady";
+                // echo $person->getFullName();
                 $this->wife_name = $person->getFullName();
             }
         }
