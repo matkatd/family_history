@@ -1,4 +1,11 @@
 <?php
+session_start();
+// Check if user is logged in, if not, redirect to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: ./../admin.php");
+    exit;
+}
+
 //echo $_SERVER['DOCUMENT_ROOT'];
 $home = "/family_history/index.php";
 $stories = "/family_history/stories.php";
@@ -86,9 +93,10 @@ if (!empty($_POST)) {
 
 
         <!-- Create the editor container -->
-        <form class="add-form" action="" method="POST">
+        <form id="add-form" action="" method="POST">
             <label for="summ-entry">Enter a short (200 characters) summary of the story:</label></br>
-            <input name="summary" type="text" maxlength="200" id="summ-entry" autocomplete="off"></br>
+            <textarea form="add-form" name="summary" type="text" maxlength="200" id="summ-entry" rows="4" cols="50"
+                autocomplete="off"><?= $story->getSummary() ?></textarea></br>
             <label for="editor">Enter your story below</label></br>
             <div id="editor"></div>
             <input type="hidden" name="story_content" id="hiddenInput">

@@ -151,12 +151,15 @@ class StoryCollection
         $query = "
             UPDATE stories
             SET summary = :summary, story = :story_content
+            WHERE story_key = :story_key
+            LIMIT 1;
         ";
         try {
             $pdo = DatabaseConnection::getConnection();
 
             $statement = $pdo->prepare($query);
 
+            $statement->bindParam('story_key', $story_key);
             $statement->bindParam(':summary', $summary);
             $statement->bindParam(':story_content', $story_content);
 
