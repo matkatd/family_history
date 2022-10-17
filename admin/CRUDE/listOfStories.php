@@ -1,13 +1,8 @@
 <?php
-session_start();
-// Check if user is logged in, if not, redirect to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ./../admin.php");
-    exit;
-}
 
+$page = "CRUDE";
 $page_title = "Stories";
-require_once "../../includes/elements/header.php";
+require_once "../admin_header.php";
 
 if (empty($_GET['signal'])) {
     header('Location: index.php');

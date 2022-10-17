@@ -1,5 +1,5 @@
 <?php
-//echo $_SERVER['DOCUMENT_ROOT'];
+// Declare all links
 $home = "/project/family_history/index.php";
 $stories = "/project/family_history/stories.php";
 $people = "/project/family_history/people.php";
@@ -7,10 +7,25 @@ $admin = "/project/family_history/admin/admin.php";
 $about = "/project/family_history/about.php";
 $logo = "/project/family_history/images/tree-of-life-drawing-celtic-style-gold.png";
 $css = "/project/family_history/styles/other.css";
+$admin_link = "Login";
+
+session_start();
+// Check if user is logged in, if not, redirect to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: ./../admin.php");
+    exit;
+} else if ($page === "CRUDE") { //Based on the page, change what the link that originally says "login"
+    $admin_link = "Admin";
+    $admin = "/project/family_history/admin/CRUDE/index.php";
+} else {
+    $admin_link = "Logout";
+    $admin = "/project/family_history/admin/logout.php";
+}
 spl_autoload_register(function ($class) {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/project/family_history/includes/classes/{$class}.php";
 });
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +53,7 @@ spl_autoload_register(function ($class) {
                     <li><a href=<?= $stories ?>>Stories</a></li>
                     <li><a href=<?= $people ?>>People</a></li>
                     <li><a href=<?= $about ?>>About</a></li>
-                    <li><a href=<?= $admin ?>>Login</a></li>
+                    <li><a href=<?= $admin ?>><?= $admin_link; ?></a></li>
                 </ul>
             </div>
         </nav>
@@ -55,11 +70,10 @@ spl_autoload_register(function ($class) {
                     <li><a href=<?= $stories ?>>Stories</a></li>
                     <li><a href=<?= $people ?>>People</a></li>
                     <li><a href=<?= $about ?>>About</a></li>
-                    <li><a href=<?= $admin ?>>Login</a></li>
+                    <li><a href=<?= $admin ?>><?= $admin_link; ?></a></li>
                 </ul>
             </div>
         </nav>
-
         <div class="title-section header-text">
             <h2>
                 <?= $page_title ?>

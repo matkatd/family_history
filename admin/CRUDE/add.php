@@ -1,21 +1,30 @@
 <?php
 session_start();
+
+$page = "CRUDE";
+//echo $_SERVER['DOCUMENT_ROOT'];
+$home = "/project/family_history/index.php";
+$stories = "/project/family_history/stories.php";
+$people = "/project/family_history/people.php";
+$admin = "/project/family_history/admin/admin.php";
+$about = "/project/family_history/about.php";
+$logo = "/project/family_history/images/tree-of-life-drawing-celtic-style-gold.png";
+$css = "/project/family_history/styles/other.css";
+$admin_link = "Login";
 // Check if user is logged in, if not, redirect to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: ./../admin.php");
     exit;
+} else if ($page !== "CRUDE") {
+    $admin_link = "Logout";
+    $admin = "/project/family_history/admin/logout.php";
+} else {
+    $admin_link = "Admin";
+    $admin = "/project/family_history/admin/CRUDE/index.php";
 }
 
-//echo $_SERVER['DOCUMENT_ROOT'];
-$home = "/family_history/index.php";
-$stories = "/family_history/stories.php";
-$people = "/family_history/people.php";
-$admin = "/family_history/admin/admin.php";
-$about = "/family_history/about.php";
-$logo = "/family_history/images/tree-of-life-drawing-celtic-style-gold.png";
-$css = "/family_history/styles/other.css";
 spl_autoload_register(function ($class) {
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/family_history/includes/classes/{$class}.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/project/family_history/includes/classes/{$class}.php";
 });
 # Get names of people from db
 $allPeople = PeopleRecordCollection::getAll();
@@ -56,7 +65,7 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Family History | Stories</title>
+    <title>Price Family History | Add</title>
     <link rel="stylesheet" href=<?= $css ?>>
     <link rel="icon" type="image/x-icon" href="<?= $logo ?>">
     <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -67,9 +76,9 @@ if (!empty($_POST)) {
 <body>
     <header class="other-page header-text">
 
-        <nav>
+        <nav id="desktop-nav">
             <a class="logo" href=<?= $home ?>>
-                <img src="/family_history/images/tree-of-life-drawing-celtic-style-gold.png"></a>
+                <img src="/project/family_history/images/tree-of-life-drawing-celtic-style-gold.png"></a>
             <div class="nav-text">
                 <a href=<?= $home ?>>
                     <h1>Price Family History</h1>
@@ -78,7 +87,24 @@ if (!empty($_POST)) {
                     <li><a href=<?= $stories ?>>Stories</a></li>
                     <li><a href=<?= $people ?>>People</a></li>
                     <li><a href=<?= $about ?>>About</a></li>
-                    <li><a href=<?= $admin ?>>Login</a></li>
+                    <li><a href=<?= $admin ?>><?= $admin_link; ?></a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav id="mobile-nav">
+            <a class="logo header-text" href=<?= $home ?>>
+                <img src="/project/family_history/images/tree-of-life-drawing-celtic-style-gold.png"></a>
+            <div class="nav-text">
+                <a href=<?= $home ?>>
+                    <h1 class="header-text">Price Family History</h1>
+                </a>
+                <div class="dropdown">Menu</div>
+                <ul class="header-text" id="mobile-overlay">
+                    <div class="exit">&times;</div>
+                    <li><a href=<?= $stories ?>>Stories</a></li>
+                    <li><a href=<?= $people ?>>People</a></li>
+                    <li><a href=<?= $about ?>>About</a></li>
+                    <li><a href=<?= $admin ?>><?= $admin_link; ?></a></li>
                 </ul>
             </div>
         </nav>
@@ -96,14 +122,14 @@ if (!empty($_POST)) {
         <form id="add-form" action="" method="POST">
             <label for="summ-entry">Enter a short (200 characters) summary of the story:</label></br>
             <textarea form="add-form" name="summary" type="text" maxlength="200" id="summ-entry" rows="4" cols="50"
-                autocomplete="off"><?= $story->getSummary() ?></textarea></br>
+                autocomplete="off" required></textarea></br>
             <label for="editor">Enter your story below</label></br>
             <div id="editor"></div>
-            <input type="hidden" name="story_content" id="hiddenInput">
+            <input type="hidden" name="story_content" id="hiddenInput" required>
 
             <label for="person[]">Select the name of the primary people associated with this story:</label></br>
             <p>(If you want to add more people, press and hold the CONTROL key (or COMMAND for MacOS users) to select
-                multiple entries))</p>
+                multiple entries)</p>
             <select name="person[]" class="drop-down" multiple="multiple">
                 <?php foreach ($allPeople as $person) : ?>
                 <option value="<?= $person->getPersonKey() ?>"><?= $person->getFullName() ?></option>
@@ -116,6 +142,7 @@ if (!empty($_POST)) {
 </body>
 <footer>
     <p>copyright 2022</p>
+    <script src="/project/family_history/js/main.js"></script>
     <script>
     const toolbarOptions = [
         ['bold', 'italic', 'underline'], // toggled buttons

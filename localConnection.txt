@@ -5,8 +5,8 @@ class DatabaseConnection
   {
     $host = 'localhost';
     $database = 'family_history';
-    $user = 'web';
-    $pass = 'password';
+    $user = 'root';
+    $pass = 'root';
     $dsn = "mysql:host={$host};dbname={$database}";
     $options = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
